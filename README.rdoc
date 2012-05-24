@@ -1,7 +1,7 @@
 == 2da.re
 
-2da.re is social application that enables you to challenge your friends.
+2da.re is social application for challenging your friends.
 
 == Team
 
-  Oto Brglez - <oto.brglez@opalab.com>
+ Oto Brglez - <oto.brglez@opalab.com>
