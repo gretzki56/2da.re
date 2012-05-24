@@ -5,5 +5,9 @@
 == Team
 
 Oto Brglez - <oto.brglez@opalab.com>
+
 Jernej Gračner -
-Jan Ambrožič
+
+Jan Ambrožič -
+
+
