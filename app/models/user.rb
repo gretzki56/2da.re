@@ -45,5 +45,16 @@ class User
   	User.find(fb_uid: fb_uid)
   end
 
+  def self.to_fbuser user
+  	fb_user = FbUser.new({
+  		name: user.name,
+  		fb_uid: user.fb_uid,
+  		created_at: DateTime.now
+  	})
+  end
+
+  def to_fbuser
+  	User.to_fbuser self
+  end
 
 end

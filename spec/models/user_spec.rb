@@ -24,52 +24,21 @@ describe User do
 		end
 	end
 
-	context "user can create challenge" do
+	context "convert to user" do
 
-		let(:oto){ build :oto }
-		let(:jernej){ build :jernej}
-		let(:janez){ build :janez}
-		let(:ch_A){ build :lb_challange}
-		let(:ch_B){ build :power_slide_challange}
+		it "can be converted" do
 
-		before :each do
-		end
+			oto = build :oto
+			oto.should respond_to :to_fbuser
 
-		it "has fb image" do
-			oto.should respond_to :image
-			oto.image.should =~ /graph/
-		end
+			fb_user = oto.to_fbuser
+			fb_user.class.should == FbUser
 
-		it "can create new challenge" do
-			ch_A.from = oto
-			ch_A.to= jernej
-			ch_A.to= janez
-	
-			ch_A.to_fb_uids.size.should == 2
+			fb_user.name.should == oto.name
+			fb_user.fb_uid.should == oto.fb_uid
+			fb_user.created_at.should_not be_nil
 
-			ch_B.from = jernej
-			ch_B.to = oto
-
-			ch_A.should be_created
-			ch_A.should be_valid
-			ch_B.should be_created
-			ch_B.should be_valid
-
-			ch_A.accept
-			ch_B.reject
-
-			ch_A.should be_accepted
-			ch_B.should be_rejected
-
-			[ch_A,ch_B].map(&:save)
-
-			ch_A_f = oto.owned_challenges.accepted.first
-			ch_A_f.should == ch_A
-
-			chl = oto.challenges.first
-			chl.should == ch_B
 		end
 
 	end
-
 end

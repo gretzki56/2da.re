@@ -9,63 +9,47 @@ describe Challenge do
 		}
 
 		it "has some requirements" do
+			challenge = Challenge.new
 			challenge.should respond_to :from
-			challenge.should respond_to :to=
-			challenge.should respond_to :to_fb_uids
-			challenge.should respond_to :status
 
 			challenge.should respond_to :title,
-				:description, :punishment, :reward, :deadline
+				:description, :punishment, :reward, :deadline,
+				:accepted_list, :rejected_list, :invited_list
 
 			challenge.title = "xxx"
 			challenge.to_s.should == "xxx"
 			challenge.to_param.should =~ /xxx/
 
-			challenge.status.should == "created"
 		end
 
 		it "has validation" do
-			challenge = Challenge.new
+
+			oto = build :oto
+
+			c = Challenge.new
+			c.valid?.should == false
+			c.errors.include?(:title) == true
+			c.errors.include?(:deadline) == true
+			c.errors.include?(:from) == true
+			c.errors.include?(:base) == true
 			
-			challenge.should_not be_valid
-			challenge.should have(1).error_on :title
-			challenge.should have(2).error_on :deadline
-			challenge.should have(1).error_on :from
+			# 1on1
+				c.public=0
+				c.should_not be_public
+				c.should be_private
 
-			challenge.should have(2).errors_on :base
-			puts challenge.errors.inspect
+				c.should_not be_one_on_one
+				# Private
+				c.errors.include?(:invited_list) == true
 
+				oto = build :oto
+				c.invited_list = [ oto.to_fbuser ]
+
+				c.valid?
+				c.should be_one_on_one
+				c.errors.include?(:invited_list) == false
 		end
 
-		it "has some workflow" do
-			challenge = build :challenge
-			challenge.status == "created"
-			
-			challenge.should respond_to :accept, :accepted?
-			challenge.accept
-			challenge.accepted?.should == true
-			challenge.status == "accepted"
-
-			challenge.should respond_to :reject, :rejected?
-			challenge.reject
-			challenge.rejected?.should == true
-			challenge.status == "rejected"
-
-			challenge.should respond_to :answer, :answered?
-			challenge.answer
-			challenge.answered?.should == true
-			challenge.status == "answered"
-
-			challenge.should respond_to :complete, :completed?
-			challenge.complete
-			challenge.completed?.should == true
-			challenge.status == "completed"
-
-			challenge.should respond_to :fail, :failed?
-			challenge.fail
-			challenge.failed?.should == true
-			challenge.status == "failed"
-		end
 	end
 
 end
