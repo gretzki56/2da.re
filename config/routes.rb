@@ -3,6 +3,10 @@ Dare::Application.routes.draw do
 
   root :to => "challenges#index"
 
+  match '/auth/:provider/callback', :to => 'users#auth'
+  match '/auth/failure', :to => "users#failure", :as => "failure"
+  match '/logout', :to => "users#logout", :as => "logout"
+
   resources :users
   resources :challenges
 

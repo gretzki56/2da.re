@@ -7,6 +7,8 @@ FactoryGirl.define do
     last_name "Brglez"
     token "AAAGPYlQIKkIBAPxZBpeQxZA8QHbAn0OpVJgAjjq3LZBoenQ5AoVrSdHb8s4kts6leEdExEbnsabyyCm1ZAS628l9vQ12EGJniuS5AH3BPgZDZD"
     locale "en_US"
+    address "Maribor, Slovenia"
+    email "otobrglez@gmail.com"
   end
 
   factory :jernej, :parent => :user do

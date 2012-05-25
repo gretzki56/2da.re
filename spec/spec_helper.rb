@@ -5,6 +5,8 @@
 require 'rubygems'
 require 'spork'
 require 'spork/ext/ruby-debug'
+require 'helpers'
+
 
 Spork.prefork do
 
@@ -26,6 +28,7 @@ Spork.prefork do
     config.include FactoryGirl::Syntax::Methods
     # config.include HelperMethods
     config.include Mongoid::Matchers
+    config.include Helpers
 
 
     # ## Mock Framework

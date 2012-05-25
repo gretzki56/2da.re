@@ -1,6 +1,9 @@
+require "google"
+
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Google::Maps
 
   field :fb_uid, type: Integer
   index :fb_uid, unique: true
@@ -9,6 +12,12 @@ class User
   field :name, type: String
   field :first_name
   field :last_name
+
+  field :address
+  field :email
+
+  field :location, type: Array
+  index [[ :location, Mongo::GEO2D ]]
 
   field :token, type: String
   field :locale, type: String
@@ -56,5 +65,37 @@ class User
   def to_fbuser
   	User.to_fbuser self
   end
+
+  def self.auth h
+  	user_new = User.new({
+  		fb_uid: h["uid"],
+  		name: h["info"]["name"],
+  		first_name: h["info"]["first_name"],
+  		last_name: h["info"]["last_name"],
+  		email: h["info"]["email"],
+  		address: h["info"]["location"],
+  		token: h["credentials"]["token"],
+  		locale: h["info"]["locale"]
+  	})
+
+  	existing_user = User.where({fb_uid: user_new.fb_uid}).first
+  	if existing_user.nil?
+  		if user_new.valid?
+  			user_new.save
+  			return user_new
+  		else
+  			return nil
+  		end
+  	else
+  		user = existing_user
+  		user.updated_at = DateTime.new
+  		user.token = user_new.token
+  		user.save
+  		return user
+  	end
+
+  	return nil
+  end
+
 
 end
