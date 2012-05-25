@@ -16,3 +16,6 @@
 
 # Procfile only local!
 /Procfile
+
+# raw-design folder inside doc folder
+/doc/raw-design

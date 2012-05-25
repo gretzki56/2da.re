@@ -5,11 +5,3 @@
 	=link_to user_path(challenge.from) do
 		%small=challenge.from
 		=fb_image_tag challenge.from, :normal, :width => 50
-
-	- if challenge.for_all?
-		%small Challenge is for everybody.
-		
-	- else
-		%small To:
-		- challenge.to_fb_uids.each do |fb_uid|
-			=fb_image_tag fb_uid, :normal, :width => 50
