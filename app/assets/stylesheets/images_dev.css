@@ -1,0 +1,39 @@
+/*
+	Put images here for developement ONLY
+*/
+
+body{
+	background:url(../images/bg.png) repeat #f9efd0;
+}
+
+#header .facebook a{
+	background:url(../images/facebook.png) left no-repeat;
+}
+
+.vote a{
+	background:url(../images/vote.png) no-repeat left;
+}
+
+.challenge .re_dare{
+	background:url(../images/re_dare.png) 0 2px no-repeat;
+}
+
+#single .time li{
+	background:url(../images/time.png) left no-repeat;
+}
+
+#single #entries .entry_vote{
+	background:url(../images/vote.png) no-repeat left;
+}
+
+#fancybox-loading, .fancybox-close, .fancybox-prev span, .fancybox-next span {
+	background-image: url(../images/fancybox_sprite.png);
+}
+
+#fancybox-loading div {
+	background: url(../images/fancybox_loading.gif) center center no-repeat;
+}
+
+.fancybox-nav {
+	background: transparent url(../images/blank.gif);
+}

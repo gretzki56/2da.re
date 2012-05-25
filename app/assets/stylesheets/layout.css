@@ -1,0 +1,570 @@
+/*
+* Skeleton V1.1
+* Copyright 2011, Dave Gamache
+* www.getskeleton.com
+* Free to use under the MIT license.
+* http://www.opensource.org/licenses/mit-license.php
+* 8/17/2011
+*/
+
+/* Table of Content
+==================================================
+	#Site Styles
+	#Page Styles
+	#Media Queries
+	#Font-Face */
+
+/* #Site Styles
+================================================== */
+/*******/
+
+body{
+	font-family: Arial, sans-serif;
+}
+
+#header h1{
+
+	font-family: 'Comfortaa', sans-serif;
+	font-weight:700;
+	line-height:42px;
+	margin-top:15px;
+	color:#2f251e;
+
+}
+#header h1 a{
+
+	text-decoration:none;
+}
+h2, h3,h4{
+
+	font-family: Arial, sans-serif;
+	color:#2f251e;
+}
+#header h1 span{
+
+	color:#d20007;
+}
+#header h5{
+	line-height:18px;
+	font-family: 'Comfortaa', sans-serif;
+	margin-bottom:15px;
+	color:#2f251e;
+}
+#header .facebook, .add{
+
+	text-align:right;
+	color:#fff;
+}
+#header .facebook{
+
+	margin-top:35px;
+}
+#header .facebook a{
+
+		background-position: 0 0;
+		height:16px;
+		padding-left:22px; 
+		text-decoration:none;
+		margin:18px 10px 0 0;
+		line-height:16px;
+	
+	
+	}
+#header .facebook a:hover{
+		background-position:0 -16px;
+		color:#777;
+	}
+#filter{
+
+	margin-top:20px;
+}
+#filter li{
+
+	display:inline;
+	padding:0 5px 0 0;
+}
+#filter li a{
+
+	text-decoration:none;
+}
+#filter li a:hover{
+
+	color:#ff1222;
+}
+
+
+#filter li::before{
+		content:"|";
+		margin-right:10px;
+		color:#adadad;
+	}
+#filter li:first-child::before{
+		content:" ";
+		
+	}
+
+.container .add,.container .add2{
+	color:#fff;
+	margin:15px 10px 0 0;
+	display:block;
+	background:#2f251e;
+	padding:5px 0;
+	
+	text-align:center;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	text-decoration:none;
+}
+.container .add:hover, .container .add2:hover{
+
+	background:#ff1222;
+	color:#fff;
+}
+.container .add2{display:none;}
+/**********/
+
+.challenge{
+
+	width:220px;
+
+	margin:0 10px 15px 0; /*IF 4th element -add 20px right margin*/
+	display:block;
+	float:left;
+	background:#fff;
+	padding-bottom:10px;
+	border:2px solid #e5d6a6;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+}
+/*EVERY FORTH ELEMENT 
+.challenge:nth-child(4n+4) {
+
+  margin-right:0;
+}*/
+
+
+.challenge .images{
+
+	margin:10px;
+	padding-bottom:10px;
+	position:relative;
+}
+
+.challenge .images img{
+
+	float:left;
+}
+.challenge .images .versus{
+	position:absolute;
+	top:80px;
+	left:80px;
+}
+ .challenge .vote{
+
+	clear:left;
+	margin:10px 10px 0;
+}
+#single .vote{
+	clear:left;
+	margin:10px  0;	
+}
+.vote a{
+	padding-left:16px;
+	font-size:13px;
+	text-decoration:none;
+
+}
+ .vote a:hover{
+
+	color:#777;
+}
+ .vote .c1{
+	float:left;
+	width:100px;
+}
+ .vote .c2{
+
+	float: right;
+
+
+}
+
+.challenge h3 a{
+
+	text-decoration:none;
+}
+
+.challenge h3 a{
+	font-size:13px;
+	font-weight:bold;
+	padding:0 10px 0;
+	display:block;
+	clear: left;
+	line-height:16px;
+	margin:0;
+	color:#2f251e
+
+}
+.challenge h3 a:hover {
+	color:#ff1222;
+}
+.challenge .deadline{
+
+	display:block;
+	padding:0 10px;
+	line-height:16px;
+	font-size:13px;
+	color:#777;
+}
+.challenge .re_dare{
+	padding:0 18px ;
+	margin-left:10px;
+	line-height:13px;
+	font-size:13px;
+	text-decoration:none;
+	color:#2f251e;
+}
+.challenge .re_dare:hover{
+
+	color:#777;
+}
+
+/*********GLOBAL CHALLANGES**********/
+.global{
+
+	border:2px solid #ff1222;
+}
+.global h3 a{
+	padding-top:5px;
+}
+
+/*********COMPLETED CHALLANGES**********/
+.completed{
+
+	border:2px solid #00a385;
+}
+.completed h3 a{
+	padding-top:5px;
+}
+
+.completed span{
+
+	margin-left:10px;
+}
+.completed span a img{
+
+	margin-right:2px;
+}
+
+/***********FOOTER*********/
+.footer{
+
+	text-align:right;
+	font-size:11px;
+	color:#777;
+}
+
+
+
+/* #Page Styles
+================================================== */
+
+/**************SINGLE PAGE******************/
+
+#single .images{
+
+	float:left;
+	padding:0 20px 30px 0;
+}
+#single .images img{
+
+	float:left;
+
+}
+
+#single h2{line-height:16px;	padding-bottom:10px; margin-bottom:0;}
+#single h2 a{
+	text-decoration:none;
+	font-size:22px;
+	color:#d20007;
+}
+#single h2 a:hover{
+
+	color:#ff1222;
+} 
+
+#single .time li{
+	margin-bottom:0;
+	padding-left:18px;
+
+
+}
+#single #entries{
+
+	clear:both;
+}
+#single #entries h3, #sidebar h2{
+
+	font-size:22px;
+	line-height:18px;
+	margin-bottom:15px;
+}
+
+#single #entries div img{
+
+	max-width:100%;
+}
+#single #entries .entry_vote{
+
+	display: block;
+	padding-left:16px;
+	font-size:13px;
+	text-decoration:none;
+	margin-bottom:20px;
+
+}
+.dares{
+			
+		margin-bottom:15px;
+		}
+		
+	.dares img{
+			border:1px solid #aaa;
+			margin-right:5px;
+		}
+.dares h4{
+	line-height:13px;
+
+}
+.dares h4 a{
+	text-decoration:none;
+	font-size:16px;
+}
+.dares span {
+	font-size:13px;
+	color:#777;
+}
+.dares h4 a:hover{
+
+	color:#ff1222;
+}
+
+.challenge_request{
+
+	margin:10px 0;
+}
+.challenge_request a{
+	padding:5px 10px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	color:#fff;
+	text-decoration:none;
+	font-size:13px;
+}
+.accept{
+
+	background:#00a385;
+}
+.reject{
+	background:#d20007;
+}
+.accept:hover, .reject:hover{
+
+	background:#2f251e;
+}
+/*****************PROFILE***********/
+
+.profile_picture{
+
+	float:left;
+	padding:0 20px 20px 0;
+}
+
+
+
+
+/****************FORMS****************/
+
+.container form{
+
+	margin-top:10px;
+}
+
+.users_chb{
+			float:left;
+			width:35%;
+			padding-top:10px;
+		}	
+	.user_chb a img{
+			float:left;
+	
+			
+		}	
+	.user_chb div{
+			width:100px;
+		}
+	.form_fields{
+			float:left;
+			width:65%;
+		}
+/* #ri Queries
+================================================== */
+
+	/* Smaller than standard 960 (devices and browsers) */
+	@media only screen and (max-width: 959px) {}
+
+	/* Tablet Portrait size to standard 960 (devices and browsers) */
+	@media only screen and (min-width: 768px) and (max-width: 959px) {
+	
+		.challenge{
+
+			margin:0 25px 15px 0;
+		}
+		/*.challenge:nth-child(4n+4) {
+			
+			  margin-right:32px;
+			}
+		.challenge:nth-child(3n){
+
+		
+			margin-right:0;
+		}*/
+	}
+
+	/* All Mobile Sizes (devices and browser) */
+	@media only screen and (max-width: 767px) {}
+
+	/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
+	@media only screen and (min-width: 480px) and (max-width: 767px) {
+			#header, #header .facebook, .container .add{
+
+			text-align:center;
+		}
+
+		#header .facebook{
+
+			margin:10px 0;
+		}
+		.container .add{display:none;}
+		.container .add2{display:block; color:#fff; }
+		#filter{
+			text-align:center;
+			font-size:16px;
+			margin-top:25px;
+		}
+
+		#challenge_list{
+			margin:0 auto;
+		}
+		.challenge{
+			width:220px;
+			margin:10px auto;
+			float:none;
+		}
+		.challenge:nth-child(4n+4) {
+
+			margin:10px auto;
+		}
+
+		.center{
+
+			margin:0 auto;
+		}
+		#single .images{
+
+			float:none;
+			width:200px;
+		}
+		#single .images_global{
+
+			clear:both;
+			margin-bottom:10px;
+		}
+		#single ul{
+
+			clear:both;
+		}
+		#single p{
+			overflow: hidden;
+		}
+
+		.user_chb, .form_fields{
+
+			float:none;
+			width:100%;
+			clear:both;
+		}
+		.user_chb a img{
+
+			float:left;
+		}
+
+	}
+
+	/* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
+	@media only screen and (max-width: 479px) {
+
+		#header, #header .facebook, .container .add{
+
+			text-align:center;
+		}
+
+		#header .facebook{
+
+			margin:10px 0;
+		}
+		.container .add{display:none;}
+		.container .add2{display:block; color:#fff;}
+		#filter{
+			text-align:center;
+			font-size:16px;
+			margin-top:25px;
+		}
+		
+		#challenge_list{
+			margin:0 auto;
+		}
+		.challenge{
+			width:220px;
+			margin:10px auto;
+			float:none;
+		}
+		/*.challenge:nth-child(4n+4) {
+
+			margin:10px auto;
+		}*/
+		#single .images{
+			float:none;
+			width:200px;
+
+		}
+		#single ul{
+
+			clear:both;
+		}
+		.user_chb, .form_fields{
+
+			float:none;
+			width:100%;
+			clear:both;
+		}
+	}
+
+
+/* #Font-Face
+================================================== */
+/* 	This is the proper syntax for an @font-face file
+		Just create a "fonts" folder at the root,
+		copy your FontName into code below and remove
+		comment brackets */
+
+/*	@font-face {
+	    font-family: 'FontName';
+	    src: url('../fonts/FontName.eot');
+	    src: url('../fonts/FontName.eot?iefix') format('eot'),
+	         url('../fonts/FontName.woff') format('woff'),
+	         url('../fonts/FontName.ttf') format('truetype'),
+	         url('../fonts/FontName.svg#webfontZam02nTh') format('svg');
+	    font-weight: normal;
+	    font-style: normal; }
+*/
