@@ -68,6 +68,7 @@
 		font-weight: normal; }
 	h1 a, h2 a, h3 a, h4 a, h5 a, h6 a { font-weight: inherit; }
 	h1 { font-size: 46px; line-height: 50px; margin-bottom: 14px;}
+	#header h1{ font-size: 30px; }
 	h2 { font-size: 35px; line-height: 40px; margin-bottom: 10px; }
 	h3 { font-size: 28px; line-height: 34px; margin-bottom: 8px; }
 	h4 { font-size: 21px; line-height: 30px; margin-bottom: 4px; }
@@ -90,7 +91,25 @@
 	blockquote cite:before { content: "\2014 \0020"; }
 	blockquote cite a, blockquote cite a:visited, blockquote cite a:visited { color: #555; }
 
-	hr { border: solid #e5d6a6; border-width: 1px 0 0; clear: both; margin: 10px 0 30px; height: 0; }
+	/*
+	hr {
+		border: solid #e5d6a6;
+		border-width: 1px 0 0;
+		clear: both;
+		margin: 10px 0 30px;
+		height: 0;
+		}
+	*/
+
+	hr{
+		border: solid #e5d6a6;
+		border-width: 1px 0 0;
+		clear: both;
+		/* margin: 10px 0 30px; */
+		margin:0px;
+		padding:0px;
+		height: 0;
+	}
 
 
 /* #Links
@@ -341,3 +360,16 @@
 	.add-bottom { margin-bottom: 20px !important; }
 
 
+
+span.translation_missing{
+	border:1px dotted green;
+}
+
+form .field_with_errors input,
+form .field_with_errors textarea{
+	background-color:1px solid red;
+}
+
+.form_errors li{
+	color:red;
+}

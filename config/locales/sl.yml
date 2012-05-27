@@ -1,0 +1,12 @@
+sl:
+  challenge_accepted: "Izziv sprejet!"
+  login_with_facebook: "Prijavi se z Facebookom"
+  logout: "Odjava"
+  all: "Vsi"
+  one_on_one: "1na1"
+  big_challenges: "Veliki izzivi"
+  completed: "Končano"
+
+  challenges:
+    index:
+      add: "Dodaj izziv"

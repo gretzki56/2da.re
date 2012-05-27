@@ -1,6 +1,9 @@
 /*
  *= require_self
 
+ *= require jquery.ui.all
+
+
  *= require base
  *= require skeleton
  *= require layout

@@ -1,7 +1,7 @@
 .challenge{:"data-id" => "#{challenge.id}"}
-	%h2
+	%h3
 		=link_to challenge, challenge_path(challenge)
 
-	=link_to user_path(challenge.from) do
-		%small=challenge.from
-		=fb_image_tag challenge.from, :normal, :width => 50
+	- unless challenge.deadline.nil?
+		.deadline
+			=t("deadline", deadline: distance_of_time_in_words_to_now(challenge.deadline))

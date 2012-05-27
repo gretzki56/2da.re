@@ -1,0 +1,75 @@
+
+- content_for :head do
+	=javascript_include_tag fb_friends_users_url(:format => "js")
+
+.challenge_form
+	.twelve.columns
+		= form_for @challenge do |f|
+
+			.users_pick
+				.users_chb_wrap.challenge
+					=image_tag "versus.png", {class: "versus"}
+
+					.img_wrap.user_a
+						=fb_image_tag f.object.from
+					.img_wrap.user_b
+						%span.number=0
+						=image_tag "default_profile.jpg"
+
+
+			.form_fields
+				-if f.object.errors.any?
+					%ul.form_errors
+						- f.object.errors.full_messages.each do |e|
+							%li=e
+
+				%label{for: "challenge_title"}=t("challenge_title")
+				= f.text_field :title
+
+				.invited_list
+					%label.fb
+						=t "invited_list"
+						%span.grey=t "type_friend_name"
+					= f.text_field :friend_search
+
+					%ul
+						= f.fields_for :invited_list do |sf|
+							%li{:class=>"fb_friend", "data-fb_uid" => sf.object.fb_uid, "data-name" => sf.object.name}
+								= image_tag "http://graph.facebook.com/#{sf.object.fb_uid}/picture?type=square"
+								.labl
+									%span.name=sf.object.name
+									%a{href:"#remove", class:"remove"}="Remove"
+								= sf.hidden_field :fb_uid, class: "i_name"
+								= sf.hidden_field :name, class: "i_fb_uid"
+
+
+
+
+					
+
+				%label{for: "challenge_description"}=t("challenge_description")
+				= f.text_area :description, {rows: 2}
+
+				.reward_punishment_split
+					.reward_wrap
+						%label{for: "challenge_reward"}=t("challenge_reward")
+						= f.text_area :reward, {rows: 2}
+
+					.punishment_wrap
+						%label{for: "challenge_punishment"}=t("challenge_punishment")
+						= f.text_area :punishment, {rows: 2}
+
+
+				%label{for: "challenge_deadline"}=t("challenge_deadline")
+				-# .deadline_fields
+				-#	= f.datetime_select :deadline
+				= f.text_field :deadline
+
+
+				.challenge_public
+					= f.check_box :public
+					%label{for: "challenge_public"}
+						=t("challenge_public")
+						%span.grey=t("if_public")
+
+				= f.submit

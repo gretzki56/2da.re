@@ -1,5 +1,24 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 en:
-  hello: "Hello world"
+  challenge_accepted: "Challenge accepted!"
+  login_with_facebook: "Login with Facebook"
+  logout: "Logout"
+  all: "All"
+  one_on_one: "1on1"
+  big_challenges: "Big challenges"
+  completed: "Completed"
+  deadline: "Ends in %{deadline}."
+
+  challenge_title: "Title"
+  challenge_deadline: "Deadline"
+  challenge_description: "Description"
+  challenge_punishment: "Punishment"
+  challenge_reward: "Reward"
+  challenge_public: "Public"
+  if_public: "(Anyone can join public challenge.)"
+
+  invited_list: "Invited friends"
+  type_friend_name: "(Type friends name.)"
+
+  challenges:
+    index:
+      add: "Add challenge"

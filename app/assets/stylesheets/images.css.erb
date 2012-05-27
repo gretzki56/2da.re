@@ -6,8 +6,9 @@ body{
 	background:url(<%= asset_path('bg.png') %>) repeat #f9efd0;
 }
 
-#header .facebook a{
-	background:url(<%= asset_path('facebook.png') %>) left no-repeat;
+#header .facebook a.auth{
+	background:url(<%= asset_path('facebook.png') %>);
+	background-repeat:no-repeat;
 }
 
 .vote a{
@@ -36,4 +37,11 @@ body{
 
 .fancybox-nav {
 	background: transparent url(<%= asset_path('blank.gif') %>);
+}
+
+.form_fields label.fb{
+	background:url(<%= asset_path('facebook.png') %>);
+	background-repeat:no-repeat;
+	background-position:0px -16px;
+
 }

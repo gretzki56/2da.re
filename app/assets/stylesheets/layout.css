@@ -26,8 +26,9 @@ body{
 
 	font-family: 'Comfortaa', sans-serif;
 	font-weight:700;
-	line-height:42px;
-	margin-top:15px;
+	line-height:40px; /* was 42px */
+
+	/* margin-top:15px; */
 	color:#2f251e;
 
 }
@@ -56,21 +57,20 @@ h2, h3,h4{
 	color:#fff;
 }
 #header .facebook{
-
-	margin-top:35px;
+	color:#333;
+	/* margin-top:35px; */
+	line-height:40px;
 }
-#header .facebook a{
-
-		background-position: 0 0;
+#header .facebook a.auth{
+		background-position:0px 0px;
 		height:16px;
 		padding-left:22px; 
 		text-decoration:none;
 		margin:18px 10px 0 0;
 		line-height:16px;
-	
-	
-	}
-#header .facebook a:hover{
+		background-repeat:no-repeat;
+}
+#header .facebook a.auth:hover{
 		background-position:0 -16px;
 		color:#777;
 	}
@@ -164,6 +164,8 @@ h2, h3,h4{
 	clear:left;
 	margin:10px 10px 0;
 }
+
+.challenge_form .vote,
 #single .vote{
 	clear:left;
 	margin:10px  0;	
@@ -271,6 +273,7 @@ h2, h3,h4{
 
 /**************SINGLE PAGE******************/
 
+.challenge_form .images,
 #single .images{
 
 	float:left;
@@ -282,12 +285,23 @@ h2, h3,h4{
 
 }
 
-#single h2{line-height:16px;	padding-bottom:10px; margin-bottom:0;}
+h2,
+#single h2{
+	line-height:16px;
+	padding-bottom:10px;
+	margin-bottom:0;
+}
+
+h2,
+h2 a,
 #single h2 a{
 	text-decoration:none;
 	font-size:22px;
+	line-height:35px;
 	color:#d20007;
 }
+
+h2 a:hover,
 #single h2 a:hover{
 
 	color:#ff1222;
@@ -390,23 +404,151 @@ h2, h3,h4{
 	margin-top:10px;
 }
 
-.users_chb{
-			float:left;
-			width:35%;
-			padding-top:10px;
-		}	
-	.user_chb a img{
-			float:left;
-	
-			
-		}	
-	.user_chb div{
-			width:100px;
-		}
+.users_pick{
+	float:left;
+	width:35%;
+	padding-top:10px;
+}	
+
+.users_pick .users_chb_wrap{
+	padding-left:10px;
+	padding-top:10px;
+	position: relative;
+	padding-bottom:25px;
+}
+
+.users_pick .challenge{
+	width:210px;
+}
+
+.users_pick .challenge img.versus{
+	position: absolute;
+	top:90px;
+	left:90px;
+}
+
+.users_pick .challenge .img_wrap{
+	float:left;
+}
+
+.users_pick .challenge .img_wrap.user_b .number{
+	position: absolute;
+	width:100px;
+	text-align:right;
+	color:red;
+	margin-top:105px;
+	font-weight:bold;
+}
+
+.users_pick .challenge .img_wrap img{
+	width:100px;
+	height:100px;
+	display: inline-block;
+}
+
+.users_pick 
+
+
+	.form_fields hr{
+		margin-top:5px;
+		margin-bottom:6px;
+		clear:both;
+		float:none;
+	}
+
 	.form_fields{
 			float:left;
 			width:65%;
 		}
+
+	.form_fields #challenge_public{
+		float:left;
+		margin-right:10px;
+	}
+
+	.form_fields input[type="text"],
+	.form_fields textarea{
+		margin-bottom:3px;
+		width:98%;
+	}
+
+	.form_fields textarea{
+		min-height:40px;
+	}
+
+	.form_fields .challenge_public{
+		margin-top:5px;
+	}
+
+	.form_fields .reward_punishment_split{
+		margin-top:10px;
+		margin-bottom:10px;
+	}
+
+	.form_fields .reward_punishment_split textarea{
+		min-height:60px;
+		width:95%;
+	}
+
+	.form_fields .reward_punishment_split .reward_wrap,
+	.form_fields .reward_punishment_split .punishment_wrap{
+		width:50%;
+		display: inline-block;
+		float:left;
+	}
+
+	.form_fields .reward_punishment_split .punishment_wrap{
+		text-align:right;
+	}
+
+	.form_fields .reward_punishment_split .punishment_wrap textarea{
+		float:right;
+	}
+
+	.form_fields label.fb{
+		padding-left:20px;
+
+	}
+
+	.form_fields label span.grey{
+		font-style:italic;
+		color:#666;
+	}
+
+	.form_fields .invited_list ul,
+	.form_fields .invited_list li{
+		list-style:none;
+		margin:0px;
+		padding:0px;
+	}
+
+	.form_fields .invited_list ul li{
+		margin-left:15px;
+		margin-top:3px;
+		margin-bottom:3px;
+		position: relative;
+		height:52px;
+	}
+
+	.form_fields .invited_list ul li img{
+		position: absolute;
+		left:0px;
+	}
+
+	.form_fields .invited_list ul li .labl{
+		padding-top:15px;
+		padding-left:60px;
+	}
+
+	.form_fields .invited_list ul li .labl .name{
+		margin-right:10px;
+		font-weight:bold;
+	}
+
+
+	.form_fields .invited_list{
+
+	}
 /* #ri Queries
 ================================================== */
 
@@ -453,6 +595,7 @@ h2, h3,h4{
 			margin-top:25px;
 		}
 
+		#challenges,
 		#challenge_list{
 			margin:0 auto;
 		}
@@ -470,20 +613,28 @@ h2, h3,h4{
 
 			margin:0 auto;
 		}
+
+		.challenge_form, .images,
 		#single .images{
 
 			float:none;
 			width:200px;
 		}
+
+		.challenge_form .images_global,
 		#single .images_global{
 
 			clear:both;
 			margin-bottom:10px;
 		}
+
+		.challenge_form ul,
 		#single ul{
 
 			clear:both;
 		}
+
+		.challenge_form p,
 		#single p{
 			overflow: hidden;
 		}
@@ -498,6 +649,8 @@ h2, h3,h4{
 
 			float:left;
 		}
+
+		/* By Oto */
 
 	}
 
@@ -533,11 +686,15 @@ h2, h3,h4{
 
 			margin:10px auto;
 		}*/
+
+		.challenge_form .images,
 		#single .images{
 			float:none;
 			width:200px;
 
 		}
+
+		.challenge_form ul,
 		#single ul{
 
 			clear:both;
@@ -568,3 +725,4 @@ h2, h3,h4{
 	    font-weight: normal;
 	    font-style: normal; }
 */
+

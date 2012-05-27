@@ -17,7 +17,9 @@ FactoryGirl.define do
     name "Jernej Gracner"
     first_name "Jernej"
     last_name "Gracner"
-    locale "en_US"
+    locale "en_GB"
+    address "Velenje, Slovenia"
+    email "oto_brglez_ml@hotmail.com"
   end
 
   factory :janez, :parent => :user do
@@ -26,5 +28,6 @@ FactoryGirl.define do
     name "Janez Novak"
     first_name "Janez"
     last_name "Novak"
+    locale "en_US"
   end 
 end

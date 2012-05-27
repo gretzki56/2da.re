@@ -1,0 +1,25 @@
+-# todo move to CSS
+:css
+	.region a.active{ font-weight:bold; color:red; }
+
+.nine.columns
+	%h1.remove-bottom
+		=link_to root_path do
+			=raw "<span>2</span>da.re"
+	-# %h5=t 'challenge_accepted'
+		
+
+
+.seven.columns.facebook
+	- unless signed_in?
+		=link_to t("login_with_facebook"), login_path, {class: 'auth'}
+	- else
+		=link_to current_user, user_path(current_user)
+		\/
+		%a(href="#reload-location")
+			%span.address=current_user.address	
+		\/
+		=current_user.locale
+
+		\/
+		=link_to t("logout"), logout_path, {class: 'auth'}

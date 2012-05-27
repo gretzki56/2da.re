@@ -1,8 +1,18 @@
 !!!
 %head
-	%title 2da.re
+	%title=page_title
 	= stylesheet_link_tag "application", :media => "all"
 	= javascript_include_tag "application"
 	= csrf_meta_tags
-%body
-	= yield
+
+	- if content_for?(:head)
+		= yield :head
+
+%body{rails_location}
+	.container
+		#header=render "layouts/header"
+		
+		%hr/
+
+		.content
+			= yield

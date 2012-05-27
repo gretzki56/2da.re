@@ -1,0 +1,138 @@
+/*
+	By Oto Brglez - <oto.brglez@opalab.com>
+*/
+
+var ChallengeForm = {
+
+	/* Reindex for rails */
+	reindex_list: function(){
+		/* challenge[invited_list_attributes][1][name] */
+
+		$(".invited_list li.fb_friend").each(function(index) {
+			var item = $(".invited_list li.fb_friend:nth("+index+")");
+			$("input.i_name",item).attr("name","challenge[invited_list_attributes]["+index+"][name]");
+			$("input.i_fb_uid",item).attr("name","challenge[invited_list_attributes]["+index+"][fb_uid]");
+		});
+	},
+
+	/* Set VS image if 1on1 or add n+1 if more */
+	set_vs_image: function(){
+		ChallengeForm.reindex_list();
+
+		var number = $(".invited_list li.fb_friend").length;
+
+		/* Number show */
+		if(number > 1){
+			$(".users_pick .number").html("+"+(number-1));
+			if(!$(".users_pick .number").is(":visible"))
+				$(".users_pick .number").show();
+		} else{
+			if($(".users_pick .number").is(":visible"))
+				$(".users_pick .number").hide();
+		};
+	
+		/* Image change */
+		if((number == 0) || (number < 0)){ /* List is empty */
+			$(".users_pick .user_b img").attr("src",
+				"<%= asset_path('default_profile.jpg'); %>");
+
+		} else {
+			var img = $(".invited_list li.fb_friend:last img").attr("src");
+			$(".users_pick .user_b img").attr("src",img);
+		};
+	},
+
+	get_item_by_fb_uid: function(fb_uid){
+		var fb_uid = fb_uid;
+		return $("li.fb_friend").filter(function(){
+			return $(this).data('fb_uid') == fb_uid
+		});
+	},
+
+	build_fb_friend: function(item){
+		var out = $('<li class="fb_friend" data-fb_uid="" data-name="">'+
+			'<img src=""/>'+
+			'<div class="labl"><span class="name"></span>'+
+			'<a href="#remove" class="remove">Remove</a></div>'+
+			'<input class="i_name" name="name" type="hidden" value="" />' +
+			'<input class="i_fb_uid" name="fb_uid" type="hidden" value="" />' +
+			+'</li>');
+
+		$("img",out).attr("src","http://graph.facebook.com/"+item.value+"/picture?type=square");
+		$("span.name",out).html(item.label);
+
+		$(out).data("name",item.label);
+		$(out).data("fb_uid",item.value);
+
+		$("input.i_name",out).attr("value",item.label);
+		$("input.i_fb_uid",out).attr("value",item.value);
+
+		return out
+	},
+
+	/* Is friend on the list? */
+	fb_friend_exists: function(item){
+
+	},
+
+	/* Add friend to list */
+	add_fb_friend: function(item){
+		/* Duplicates!!! */
+
+		$("div.challenge_form form .invited_list ul").prepend(
+			ChallengeForm.build_fb_friend(item)
+		,true);
+
+		ChallengeForm.set_vs_image();
+	},
+
+	/* Remove friend from list */
+	remove_fb_friend: function(fb_uid){
+		ChallengeForm.get_item_by_fb_uid(fb_uid).fadeOut(function(){
+			$(this).remove();
+			ChallengeForm.set_vs_image();
+		});
+	}
+};
+
+(function($){ 
+    $.fn.extend({  
+        ChallengeFormPlugin: function() {
+            return this.each(function() {
+
+            	ChallengeForm.set_vs_image();
+
+            	$("div.challenge_form form .invited_list ul a.remove").live("click",function(e){
+            		if(e.preventDefault) e.preventDefault();
+            		var fb_uid = $($(this).parents("li")).data("fb_uid");
+            		ChallengeForm.remove_fb_friend(fb_uid);
+            	});
+
+             	$("#challenge_friend_search",this).autocomplete({
+             		source: fb_friends,
+             		focus: function() {
+             			return false;
+             		},
+             		select: function( event, ui ){
+             			$("#challenge_friend_search").attr("value","");
+             			ChallengeForm.add_fb_friend(ui.item);
+             			return false;
+             		}
+             	}).data("autocomplete")._renderItem = function(ul, item){
+					return $( "<li></li>" )
+					.data( "item.autocomplete", item )
+					.append( "<a>"+"<img width=\"20\" src=\"http://graph.facebook.com/"+item.value+"/picture?type=square\"/> "+
+						item.label + "</a>" )
+					.appendTo( ul );
+             	};
+
+
+            });
+        }
+    });
+     
+})(jQuery);
+
+$(function(){
+	$("div.challenge_form form").ChallengeFormPlugin();
+});

@@ -2,8 +2,6 @@ class Challenge
   include Mongoid::Document
   include Mongoid::Timestamps
 
-
-
   field :title
   field :description
   field :punishment
@@ -19,15 +17,19 @@ class Challenge
 
   belongs_to :from, class_name: "User"
 
-  embeds_many :invited_list, class_name: "User"
-  embeds_many :accepted_list, class_name: "User"
-  embeds_many :rejected_list, class_name: "User"
+  embeds_many :invited_list, class_name: "FbUser"
+  embeds_many :accepted_list, class_name: "FbUser"
+  embeds_many :rejected_list, class_name: "FbUser"
 
+  accepts_nested_attributes_for :invited_list
+
+  attr_accessor :friend_search
 
   validate do |ch|
-  	ch.must_have_users_if_private
-	ch.must_be_punishment_or_reward
-	ch.must_be_in_future
+    # ch.must_not_invite_himself
+    ch.must_have_users_if_private
+    ch.must_be_punishment_or_reward
+    ch.must_be_in_future
   end
 
   def to_s
@@ -49,14 +51,23 @@ class Challenge
   # Challange deadline must be set in feature
   def must_be_in_future
 	if deadline.nil? || deadline < DateTime.now
-		errors.add(:deadline, "Time to complete the challenge must be set in feature!")
+		errors.add(:deadline, "must be set in feature")
   	end
   end
 
   def must_have_users_if_private
   	if private? and (invited_list.nil? || invited_list.empty?)
-  		errors.add(:invited_list, "You must invite friends to your private challenge!")
+  		errors.add(:invited_list, "must include at least one your friends")
   	end
+  end
+
+  def must_not_invite_himself
+    if not(invited_list.nil?) and not(invited_list.empty?)
+      in_invlist = invited_list.where({fb_uid:fb_uid}).first
+      unless in_invlist.nil?
+        errors.add(:invited_list,"You can't invite yourself!")
+      end
+    end
   end
 
   # You must set at least one FB user if its not for all
@@ -78,6 +89,14 @@ class Challenge
   	not(invited_list.nil?) and invited_list.size == 1
   end
 
+  default_scope order_by([:updated_at,:desc])
+
+
+  scope :public, where(deleted: 0)
+
+  scope :all, ->(){
+    public
+  }
 
 
 =begin

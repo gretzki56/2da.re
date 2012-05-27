@@ -1,0 +1,6 @@
+var fb_friends = <%= raw @fb_friends.map {|fb_user|
+	{
+		value: fb_user.fb_uid,
+	 	label: fb_user.name
+	}
+}.to_json %>;

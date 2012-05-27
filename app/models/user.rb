@@ -21,6 +21,7 @@ class User
 
   field :token, type: String
   field :locale, type: String
+  field :timezone, type: Integer
 
   validates_presence_of :fb_uid
   validates_presence_of :token
@@ -75,7 +76,8 @@ class User
   		email: h["info"]["email"],
   		address: h["info"]["location"],
   		token: h["credentials"]["token"],
-  		locale: h["info"]["locale"]
+  		locale: h["info"]["locale"],
+      timezone: h["info"]["timezone"]
   	})
 
   	existing_user = User.where({fb_uid: user_new.fb_uid}).first
@@ -97,5 +99,26 @@ class User
   	return nil
   end
 
+
+  def fb path
+    begin
+      url = "https://graph.facebook.com#{path}?access_token=#{self.token}"
+      JSON.parse(HTTParty.get(url).body)
+    rescue
+      return nil
+    end    
+  end
+
+  def fb_friends
+    res = fb("/#{self.fb_uid}/friends")
+    
+    unless res.nil?
+      return res["data"].map { |user|
+        FbUser.new({fb_uid: user["id"], name: user["name"]})
+      }
+    end
+
+    []
+  end
 
 end

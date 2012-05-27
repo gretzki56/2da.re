@@ -3,10 +3,13 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
   helper_method :signed_in?
+  
 
   before_filter :redirect_if_host, :if => ->(){
   	%w(2da.re www.2da.re).include? request.host
   }
+
+  before_filter :set_language
 
   def current_user
 	@current_user ||= User.find(session[:user_id]) if session[:user_id]
@@ -18,6 +21,10 @@ class ApplicationController < ActionController::Base
 
   def redirect_if_host
   	render :layout => "beta"
+  end
+
+  def set_language
+	# I18n.locale = "sl"
   end
 
 end

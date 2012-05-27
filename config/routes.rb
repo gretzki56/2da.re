@@ -7,9 +7,12 @@ Dare::Application.routes.draw do
   match '/auth/failure', :to => "users#failure", :as => "failure"
   match '/logout', :to => "users#logout", :as => "logout"
 
-  resources :users
+  resources :users do
+    get :fb_friends, :on => :collection,
+      :constraints => { :format => /js|json/ }, :as => "fb_friends"
+  end
   resources :challenges
-
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

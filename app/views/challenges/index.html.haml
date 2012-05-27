@@ -1,3 +1,20 @@
-%h1 Challenges
 
-= render @challenges
+.top_tools
+	.twelve.columns
+		- if signed_in?
+			=link_to t(".add"), new_challenge_path, {class: "add2"}
+
+		%ul#filter
+			%li=link_to t("all"), challenges_path
+			-#
+				%li=link_to t("one_on_one"), challenges_path
+				%li=link_to t("big_challenges"), challenges_path
+				%li=link_to t("completed"), challenges_path
+
+	- if signed_in?
+		.four.columns
+			=link_to t(".add"), new_challenge_path, {class: "add"}
+
+.sixteen.columns
+	#challenges
+		= render @challenges
