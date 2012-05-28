@@ -6,10 +6,26 @@
 
 		%ul#filter
 			%li=link_to t("all"), challenges_path
+
+			- if signed_in?
+				%li=link_to t("mine"), challenges_path(:type => "mine")
+
+				- if params[:type] == "mine"
+					(
+					=link_to t("invited"), challenges_path(:type => "mine", :mode => "invited")
+					|
+					=link_to t("accepted"), challenges_path(:type => "mine", :mode => "accepted")
+					|
+					=link_to t("rejected"), challenges_path(:type => "mine", :mode => "rejected")
+					)
+
+
 			-#
 				%li=link_to t("one_on_one"), challenges_path
 				%li=link_to t("big_challenges"), challenges_path
 				%li=link_to t("completed"), challenges_path
+
+
 
 	- if signed_in?
 		.four.columns

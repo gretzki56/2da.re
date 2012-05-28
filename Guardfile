@@ -13,8 +13,9 @@ end
 #  watch(%r{^features/step_definitions/(.+)_steps\.rb$}) { |m| Dir[File.join("**/#{m[1]}.feature")][0] || 'features' }
 # end
 
-guard 'livereload' do
-  watch(%r{app/views/.+\.(erb|haml|slim)})
+guard 'livereload', :apply_css_live => false, :apply_js_live => false do
+  watch(%r{app/views/.+\.(erb|haml|slim|js|rabl)})
+  watch(%r{app/assets/.+\.(erb|haml|slim|js|rabli|css|scss|sass)})
   watch(%r{app/helpers/.+\.rb})
   watch(%r{public/.+\.(css|js|html)})
   watch(%r{config/locales/.+\.yml})

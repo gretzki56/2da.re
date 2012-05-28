@@ -21,6 +21,8 @@ class Challenge
   embeds_many :accepted_list, class_name: "FbUser"
   embeds_many :rejected_list, class_name: "FbUser"
 
+  has_many :proofs
+
   accepts_nested_attributes_for :invited_list
 
   attr_accessor :friend_search
@@ -42,10 +44,10 @@ class Challenge
 
   # Challenge must have punishment or reward
   def must_be_punishment_or_reward
-	if (punishment.nil? or punishment.to_s.strip == "") and
-		(reward.nil? or reward.to_s.strip == "")
-			errors.add(:base, "Challenge must have punishment and/or reward")
-	end  
+  	if (punishment.nil? or punishment.to_s.strip == "") and
+  		(reward.nil? or reward.to_s.strip == "")
+  			errors.add(:base, "Challenge must have punishment and/or reward")
+  	end  
   end
 
   # Challange deadline must be set in feature
@@ -85,12 +87,7 @@ class Challenge
   	not public?
   end
 
-  def one_on_one?
-  	not(invited_list.nil?) and invited_list.size == 1
-  end
-
   default_scope order_by([:updated_at,:desc])
-
 
   scope :public, where(deleted: 0)
 
@@ -98,6 +95,65 @@ class Challenge
     public
   }
 
+  # Find all challenges where user is involved
+  scope :from, ->(user){
+    if user.class == User
+      any_of({ from_id: user.id },
+        {:"invited_list.fb_uid" => user.fb_uid},
+        {:"accepted_list.fb_uid" => user.fb_uid},
+        {:"rejected_list.fb_uid" => user.fb_uid}
+      )
+    elsif user.class == FbUser
+      any_of(
+        {:"invited_list.fb_uid" => user.fb_uid},
+        {:"accepted_list.fb_uid" => user.fb_uid},
+        {:"rejected_list.fb_uid" => user.fb_uid}
+      )
+    end
+  }
+
+  scope :accepted, ->(user){
+    any_of(
+        {:"accepted_list.fb_uid" => user.fb_uid}
+      )
+  }
+
+  scope :invited, ->(user){
+    any_of(
+        {:"invited_list.fb_uid" => user.fb_uid}
+      )
+  }
+
+  scope :rejected, ->(user){
+    any_of(
+        {:"rejected_list.fb_uid" => user.fb_uid}
+    )    
+  }
+
+  def one_on_one?
+    not(public?) and (
+      not(invited_list.nil?) and invited_list.size == 1)
+  end
+
+  def expired?
+    DateTime.strptime(deadline.to_s) < DateTime.now
+  end
+
+  def statuses
+    out = []
+
+    out << :expired if expired?
+    out << :ongoing if not(expired?)
+    out << :public if public?
+    out << :private if not(public?)
+    out << :one_on_one if one_on_one?
+
+    out
+  end
+
+  def possible_actions
+
+  end
 
 =begin
 

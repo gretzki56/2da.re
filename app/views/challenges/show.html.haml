@@ -1,1 +1,40 @@
 %h2=page_title @challenge
+
+%p
+	Deadline:
+	= @challenge.deadline
+
+%p
+	Created at:
+	= @challenge.created_at
+
+	- if @challenge.updated_at != @challenge.created_at
+		%br/
+		Updated at:
+		= @challenge.updated_at
+
+- if signed_in?
+	.challenge_request
+
+		-@challenge.statuses.each do |status|
+			%strong=status.to_s
+
+
+%strong from
+= @challenge.from
+%br/
+= image_tag @challenge.from.image
+
+%br/
+
+
+%strong Invited
+%br/
+
+- @challenge.invited_list.each do |fb_user|
+	=image_tag fb_user.image :square
+
+%br/
+%strong Accepted 
+- @challenge.accepted_list.each do |fb_user|
+	=image_tag fb_user.image :square

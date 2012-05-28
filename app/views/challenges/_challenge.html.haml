@@ -1,7 +1,55 @@
-.challenge{:"data-id" => "#{challenge.id}"}
+- statuses= challenge.statuses
+.challenge{class: statuses}
+
+	.images
+		=image_tag "versus.png", class: "versus"
+	
+		.user_a
+			=link_to challenge_path(challenge) do
+				=image_tag challenge.from.image(:square), width:100
+				%span.name=challenge.from
+
+		- if statuses.include? :one_on_one
+			.user_b
+				=link_to challenge_path(challenge) do
+					=image_tag challenge.invited_list.first.image(:square), width:100
+					%span.name=challenge.invited_list.first
+
+		- else
+			.user_b
+				=link_to challenge_path(challenge) do
+					- if challenge.accepted_list.empty?
+						=image_tag challenge.invited_list.first.image(:square), width:100
+						%span.name=challenge.invited_list.first
+					- else
+						=image_tag challenge.accepted_list.first.image(:square), width:100
+						%span.name=challenge.accepted_list.first					
+
+
 	%h3
 		=link_to challenge, challenge_path(challenge)
+
+
+	- # Magic others thumbnails
+	- if not(statuses.include?(:one_on_one))
+	
+		.participants
+			- invited_list_size = challenge.invited_list.size
+			- if invited_list_size > 1 
+				%ul
+					- challenge.invited_list[1..(invited_list_size>5? 5 : invited_list_size)].each do |fb_user|
+						%li=image_tag fb_user.image(:square), width:20
+					- if invited_list_size > 5
+						%li="+#{invited_list_size-5}"
+
+
 
 	- unless challenge.deadline.nil?
 		.deadline
 			=t("deadline", deadline: distance_of_time_in_words_to_now(challenge.deadline))
+
+
+	-# %span=challenge.statuses.map(&:to_s).join(", ")
+
+
+

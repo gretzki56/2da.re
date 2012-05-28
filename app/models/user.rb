@@ -38,7 +38,7 @@ class User
 
   # Challanges where user is involved
   def challenges
-  	Challenge.public.by(self)
+  	Challenge.public.from(self)
   end
 
   def self.image type=:normal, l_fb_uid=nil

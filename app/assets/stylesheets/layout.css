@@ -146,14 +146,34 @@ h2, h3,h4{
 .challenge .images{
 
 	margin:10px;
-	padding-bottom:10px;
+	padding-bottom:5px;
 	position:relative;
 }
 
 .challenge .images img{
-
-	float:left;
+	clear: both;
 }
+
+.challenge .images a{
+	text-decoration:none;
+}
+.challenge .images a span.name{
+	font-size:13px;
+		color:#777;
+		line-height:16px;
+}
+
+.challenge .images .user_a,
+.challenge .images .user_b{
+	display: inline-block;
+	float:left;
+	width:100px;
+}
+
+.challenge .images .user_b{
+	text-align:right;
+}
+
 .challenge .images .versus{
 	position:absolute;
 	top:80px;
@@ -210,6 +230,8 @@ h2, h3,h4{
 .challenge h3 a:hover {
 	color:#ff1222;
 }
+
+.challenge .participants,
 .challenge .deadline{
 
 	display:block;
@@ -218,6 +240,28 @@ h2, h3,h4{
 	font-size:13px;
 	color:#777;
 }
+
+.challenge .participants ul,
+.challenge .participants li{
+	margin:0px;
+	padding:0px;
+}
+
+.challenge .participants li{
+	float:left;
+	display: inline-block;
+	min-width:20px;
+	height:20px;
+	line-height:20px;
+	margin-right:3px;
+}
+
+.challenge .participants ul{
+	overflow: hidden;
+	height:20px;
+	margin-bottom:3px;
+}
+
 .challenge .re_dare{
 	padding:0 18px ;
 	margin-left:10px;

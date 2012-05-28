@@ -1,8 +1,23 @@
 class ChallengesController < ApplicationController
 
+	respond_to :html, :json, :js
 
 	def index
-		@challenges = Challenge.all
+		types = %w(all mine)
+		type = params[:type] || "all"
+
+		type = types.first unless types.include?(type)
+		if type =~ /mine/i
+			if params[:mode] =~ /accepted|invited|rejected/
+				@challenges = Challenge.all.send Regexp.last_match.to_s.to_sym, current_user
+			else
+				@challenges = Challenge.all.from current_user
+			end
+		else
+			@challenges = Challenge.all
+		end
+		
+		respond_with(@challenges)
 	end
 
 
@@ -21,13 +36,6 @@ class ChallengesController < ApplicationController
 		@challenge = Challenge.new
 		@challenge.from = current_user
 		@challenge.deadline = DateTime.now+2.days
-
-=begin
-		@challenge.invited_list = [
-			User.last.to_fbuser,
-			User.last.to_fbuser		
-		]
-=end
 	end
 
 	def create
