@@ -19,3 +19,6 @@
 
 # raw-design folder inside doc folder
 /doc/raw-design
+
+# Uploads
+/public/uploads/*
