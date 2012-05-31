@@ -94,7 +94,15 @@ class Challenge
   scope :public, where(deleted: 0)
 
   scope :all, ->(){
-    public.where(:"proofs.photos.ne" => nil)
+    public
+  }
+  scope :page, ->(page=1, per_page=12){
+    page=0 if page < 0 # Start at page=1
+
+    per_page = per_page + 1 # check!
+    skip = (page*per_page)-page
+    skip = 0 if skip < 0
+    limit(per_page).skip(skip)
   }
 
   # Find all challenges where user is involved

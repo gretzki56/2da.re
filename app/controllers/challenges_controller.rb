@@ -24,12 +24,16 @@ class ChallengesController < ApplicationController
 	end
 
 	def index
-		types = %w(all mine)
-		type = params[:type] || "all"
+		@types = %w(all mine)
+		@type = params[:type] || "all"
+		@mode = params[:mode]
 
-		type = types.first unless types.include?(type)
-		if type =~ /mine/i
-			if params[:mode] =~ /accepted|invited|rejected/
+		@page = params[:page].to_i <= 0 ? 0 : params[:page].to_i
+		@per_page = params[:per_page].to_i <= 0 ? 12 : params[:per_page].to_i
+
+		@type = @types.first unless @types.include?(@type)
+		if @type =~ /mine/i
+			if @mode =~ /accepted|invited|rejected/
 				@challenges = Challenge.all.send Regexp.last_match.to_s.to_sym, current_user
 			else
 				@challenges = Challenge.all.from current_user
@@ -38,8 +42,10 @@ class ChallengesController < ApplicationController
 			@challenges = Challenge.all
 		end
 		
+		@challenges = @challenges.page(@page,@per_page)
 
 		@challenges = ChallengeDecorator.decorate(@challenges)
+		
 		respond_with(@challenges)
 	end
 

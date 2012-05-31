@@ -500,6 +500,12 @@ h2 a:hover,
 	text-transform:uppercase;
 }
 
+.challenge_tools a.edit,
+.edit{
+
+	background:#333;
+}
+
 .challenge_tools a.accept,
 .accept{
 
@@ -511,6 +517,7 @@ h2 a:hover,
 	background:#d20007;
 }
 
+.challenge_tools .edit:hover, 
 .challenge_tools .accept:hover, 
 .challenge_tools .reject:hover,
 .accept:hover, .reject:hover{
@@ -787,6 +794,24 @@ h2 a:hover,
 
 .messages .error{
 	color:red;
+}
+
+.remove-bottom a{
+	background-color:white;
+	padding-left:10px;
+	padding-right:10px;
+
+		
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+#header .remove-bottom a{
+	font-size:20px;
+}
+
+#header .remove-bottom a span.mission_statement{
+	color:#666;
 }
 
 /* #ri Queries

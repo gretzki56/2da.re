@@ -71,7 +71,7 @@ class ChallengeDecorator < Draper::Base
         end
 
         if model.owner?(user)
-          content << h.link_to(h.t("edit"), h.edit_challenge_path(challenge))
+          content << h.link_to(h.t("edit"), h.edit_challenge_path(challenge), remote:false, class: "edit")
         end
 
         h.raw content.join(&:+)

@@ -1,4 +1,5 @@
 en:
+  mission_statement: Ready to challenge friends?
   challenge_accepted: "Challenge accepted! You have %{deadline} to complete the challenge."
   login_with_facebook: "Login with Facebook"
   logout: "Logout"
@@ -32,6 +33,9 @@ en:
 
   proofs: Proofs
   proof: Proof
+
+  page_prev: "Back"
+  page_next: "Next"
 
   challenges:
     index:

@@ -5,10 +5,30 @@
 
 $(function(){
 
-	/* Masonry plugin */
-	$("div#challenges").masonry({
-		itemSelector: '.challenge'
-	});
+	var challenges_grid = $("div#challenges");
+	if(challenges_grid.length != 0){
+
+		// $("#challenges_paging").hide();
+
+		challenges_grid.imagesLoaded(function(){
+			challenges_grid.masonry({
+				itemSelector: '.challenge'
+			});
+		});
+
+		challenges_grid.infinitescroll({
+			navSelector  : '#challenges_paging',
+			nextSelector : '#challenges_paging a.page_next',
+			itemSelector : '.challenge'
+		},function( element ) {
+        	var $newElems = $( element ).css({ opacity: 0 });
+			$newElems.imagesLoaded(function(){
+				$newElems.animate({ opacity: 1 });
+				challenges_grid.masonry( 'appended', $newElems, true ); 
+			})
+		});
+
+	};
 
 	/* Hide messages on top of site */
 	if($(".messages").length != 0){

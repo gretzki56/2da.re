@@ -1,4 +1,3 @@
-
 .top_tools
 	.twelve.columns
 		- if signed_in?
@@ -18,19 +17,13 @@
 					|
 					=link_to t("rejected"), challenges_path(:type => "mine", :mode => "rejected")
 					)
-
-
-			-#
-				%li=link_to t("one_on_one"), challenges_path
-				%li=link_to t("big_challenges"), challenges_path
-				%li=link_to t("completed"), challenges_path
-
-
-
 	- if signed_in?
 		.four.columns
 			=link_to t(".add"), new_challenge_path, remote: !true, class: "add"
 
 .sixteen.columns
 	#challenges
-		= render @challenges
+		=render_challenges @challenges
+
+	#challenges_paging
+		= render_challenges_paging
