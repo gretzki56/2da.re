@@ -10,6 +10,7 @@ class Challenge
   field :public, type: Integer, default: 0
   field :deleted, type: Integer, default: 0
   field :deadline, type: DateTime
+  field :proofs_count, type: Integer, default: 0
 
   validates_presence_of :from
   validates_presence_of :title
@@ -24,6 +25,7 @@ class Challenge
   has_many :proofs
 
   accepts_nested_attributes_for :invited_list
+  accepts_nested_attributes_for :accepted_list
 
   attr_accessor :friend_search
 
@@ -92,7 +94,7 @@ class Challenge
   scope :public, where(deleted: 0)
 
   scope :all, ->(){
-    public
+    public.where(:"proofs.photos.ne" => nil)
   }
 
   # Find all challenges where user is involved
@@ -130,6 +132,83 @@ class Challenge
     )    
   }
 
+  def invited? user
+    #invited_list.where(:"fb_uid"=>user.fb_uid).first
+    invited_list.to_a.map(&:fb_uid).include? user.fb_uid
+  end
+
+  def rejected? user
+    #rejected_list.where(:"fb_uid"=>user.fb_uid).first
+    rejected_list.to_a.map(&:fb_uid).include? user.fb_uid
+  end
+
+  def accepted? user
+    #accepted_list.where(:"fb_uid"=>user.fb_uid).first
+    accepted_list.to_a.map(&:fb_uid).include? user.fb_uid
+  end
+
+  def owner? user
+    from == user
+  end
+
+  def can_accept? user
+    return false if expired? or owner?(user)
+
+    if public?
+      not(accepted?(user))
+    elsif private?
+      if invited?(user)
+        not(accepted?(user))
+      else
+        false
+      end
+    else
+      false
+    end
+  end
+
+  def can_reject? user
+    return false if expired? or owner? user
+
+    if public?
+      accepted?(user)
+    elsif private?
+      if invited?(user)
+        not(rejected?(user))
+      else
+        false
+      end
+    else
+      false
+    end
+  end
+
+  def accept! user
+    if can_accept? user
+      fb_user = user.to_fbuser
+      fb_user.created_at = DateTime.now
+
+      rejected_list.destroy_all(fb_uid: fb_user.fb_uid)
+      accepted_list << fb_user
+      save
+    end
+  end
+
+  def reject! user
+    if can_reject? user
+      fb_user = user.to_fbuser
+      fb_user.created_at = DateTime.now
+
+      accepted_list.destroy_all(fb_uid: fb_user.fb_uid)
+      rejected_list << fb_user
+      save
+    end
+  end
+
+  def can_proof? user
+    accepted?(user) or from==user
+  end
+
   def one_on_one?
     not(public?) and (
       not(invited_list.nil?) and invited_list.size == 1)
@@ -137,6 +216,10 @@ class Challenge
 
   def expired?
     DateTime.strptime(deadline.to_s) < DateTime.now
+  end
+
+  def has_image_proofs?
+    proofs.where(:"photo.ne" => nil).last
   end
 
   def statuses
@@ -147,6 +230,7 @@ class Challenge
     out << :public if public?
     out << :private if not(public?)
     out << :one_on_one if one_on_one?
+    out << :with_proofs if has_image_proofs?
 
     out
   end

@@ -3,7 +3,8 @@
 */
 
 body{
-	background:url(<%= asset_path('bg.png') %>) repeat #f9efd0;
+	/* background:url(<%= asset_path('bg.png') %>) repeat #f9efd0; */
+	background:url(<%= asset_path('main_bg.jpg') %>) repeat white;
 }
 
 #header .facebook a.auth{
@@ -43,5 +44,11 @@ body{
 	background:url(<%= asset_path('facebook.png') %>);
 	background-repeat:no-repeat;
 	background-position:0px -16px;
+}
 
+
+.challenge.public h3{
+	text-indent:20px;
+	background-image:url(<%= asset_path('public_small.png') %>);
+	background-repeat:no-repeat;
 }

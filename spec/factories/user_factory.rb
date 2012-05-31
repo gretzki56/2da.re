@@ -24,7 +24,7 @@ FactoryGirl.define do
 
   factory :janez, :parent => :user do
     fb_uid 686866883
-    nickname "GRETZKi"
+    nickname "novak"
     name "Janez Novak"
     first_name "Janez"
     last_name "Novak"

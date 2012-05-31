@@ -31,6 +31,8 @@ body{
 	/* margin-top:15px; */
 	color:#2f251e;
 
+	color:white;
+
 }
 #header h1 a{
 
@@ -127,14 +129,24 @@ h2, h3,h4{
 
 	width:220px;
 
+
 	margin:0 10px 15px 0; /*IF 4th element -add 20px right margin*/
 	display:block;
 	float:left;
 	background:#fff;
-	padding-bottom:10px;
+	padding-bottom:5px;
+	/*
 	border:2px solid #e5d6a6;
 	-webkit-border-radius: 6px;
 	border-radius: 6px;
+	*/
+
+	border:1px solid #EAEAE8;
+	-moz-border-radius:5px;
+	-webkit-border-radius: 5px;
+	border-radius:5px;
+
+
 }
 /*EVERY FORTH ELEMENT 
 .challenge:nth-child(4n+4) {
@@ -144,10 +156,14 @@ h2, h3,h4{
 
 
 .challenge .images{
-
 	margin:10px;
 	padding-bottom:5px;
 	position:relative;
+	height:100px;
+	display: block;
+	clear: both;
+	float:none;
+	margin-top:0px;
 }
 
 .challenge .images img{
@@ -161,6 +177,20 @@ h2, h3,h4{
 	font-size:13px;
 		color:#777;
 		line-height:16px;
+}
+
+.challenge .challenge_tools{
+	margin:0px;
+	padding:0px;
+	padding-left:10px;
+	padding-bottom:5px;
+	height:16px;
+	line-height:16px;
+}
+
+.challenge .challenge_tools a{
+		height:16px;
+	line-height:16px;
 }
 
 .challenge .images .user_a,
@@ -185,6 +215,7 @@ h2, h3,h4{
 	margin:10px 10px 0;
 }
 
+.challenge_show,
 .challenge_form .vote,
 #single .vote{
 	clear:left;
@@ -211,26 +242,33 @@ h2, h3,h4{
 
 }
 
-.challenge h3 a{
+.challenge h3{
+	margin:10px;
+	margin-top:10px;
+	margin-bottom:10px;
+	display: block;
+}
 
+.challenge h3 a{
 	text-decoration:none;
 }
 
 .challenge h3 a{
-	font-size:13px;
+	font-size:14px;
 	font-weight:bold;
 	padding:0 10px 0;
 	display:block;
 	clear: left;
 	line-height:16px;
-	margin:0;
-	color:#2f251e
-
+	margin:0px;
+	padding:0px;
+	color:#2f251e;
 }
 .challenge h3 a:hover {
 	color:#ff1222;
 }
 
+.challenge .acceptable,
 .challenge .participants,
 .challenge .deadline{
 
@@ -239,6 +277,20 @@ h2, h3,h4{
 	line-height:16px;
 	font-size:13px;
 	color:#777;
+	margin:0px;
+}
+
+.challenge .deadline{
+	margin-bottom:2px;
+}
+
+.challenge .acceptable{
+	color:green;
+	text-align:right;
+}
+
+.challenge .participants{
+	height:20px;
 }
 
 .challenge .participants ul,
@@ -273,6 +325,24 @@ h2, h3,h4{
 .challenge .re_dare:hover{
 
 	color:#777;
+}
+
+.challenge .images .user_a img,
+.challenge .images .user_b img{
+	width:100px;
+}
+
+.challenge.with_proofs .user_a img,
+.challenge.with_proofs .user_b img{
+	width:20px;
+}
+
+.challenge.with_proofs .images{
+	height:120px;
+}
+
+.challenge.public{
+	
 }
 
 /*********GLOBAL CHALLANGES**********/
@@ -317,12 +387,14 @@ h2, h3,h4{
 
 /**************SINGLE PAGE******************/
 
+.challenge_show .images,
 .challenge_form .images,
 #single .images{
 
 	float:left;
 	padding:0 20px 30px 0;
 }
+
 #single .images img{
 
 	float:left;
@@ -351,6 +423,7 @@ h2 a:hover,
 	color:#ff1222;
 } 
 
+.challenge .time li,
 #single .time li{
 	margin-bottom:0;
 	padding-left:18px;
@@ -407,10 +480,13 @@ h2 a:hover,
 	color:#ff1222;
 }
 
+.challenge_tools,
 .challenge_request{
 
 	margin:10px 0;
 }
+
+.challenge_tools a,
 .challenge_request a{
 	padding:5px 10px;
 	-webkit-border-radius: 6px;
@@ -419,17 +495,99 @@ h2 a:hover,
 	text-decoration:none;
 	font-size:13px;
 }
+
+.challenge_tools a{
+	text-transform:uppercase;
+}
+
+.challenge_tools a.accept,
 .accept{
 
 	background:#00a385;
 }
+
+.challenge_tools a.reject,
 .reject{
 	background:#d20007;
 }
+
+.challenge_tools .accept:hover, 
+.challenge_tools .reject:hover,
 .accept:hover, .reject:hover{
 
 	background:#2f251e;
 }
+
+
+.challenge_tools,
+.challenge_tools a{
+	height:30px;
+	line-height:30px;
+	margin:0px;
+	padding:0px;
+}
+
+
+.challenge_tools{
+	margin-bottom:10px;
+}
+
+.challenge_tools a{
+	margin-right:5px;
+	display: inline-block;
+	background-color:#ccc;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	padding-left:5px;
+	padding-right:5px;	
+}
+
+.challenge_show .proofs .proofs_list{
+	border-bottom:1px solid #CCC;
+}
+
+.challenge_show .proofs .proofs_list .proof{
+	position: relative;
+	display: block;
+	margin-bottom:5px;
+}
+
+
+.challenge_show .proofs .proofs_list .proof .user{
+
+	height:20px;
+	line-height:20px;
+	margin-bottom:10px;
+}
+
+.challenge_show .proofs .proofs_list .proof .user .image,
+.challenge_show .proofs .proofs_list .proof .user .name,
+.challenge_show .proofs .proofs_list .proof .user .created_at{
+	float:left;
+	margin-right:5px;
+}
+
+.challenge_show .proofs .proofs_list .proof .user img{
+	width:20px;
+}
+
+
+.challenge_show .proofs .proofs_list .proof .photo{
+	padding:3px;
+	background-color:white;
+	border:1px solid #CCC;
+	margin:0px;
+	height:100px;
+	width:200px;
+}
+
+
+.challenge_show .proofs .proofs_list .proof .photo,
+.challenge_show .proofs .proofs_list .proof .comment{
+	margin-left:20px;
+	margin-bottom:5px;
+}
+
 /*****************PROFILE***********/
 
 .profile_picture{
@@ -593,6 +751,44 @@ h2 a:hover,
 	.form_fields .invited_list{
 
 	}
+
+
+.fb_users_list{
+	display: block;
+	clear:both;
+	float:none;
+	overflow:hidden;
+	height:auto;
+}
+
+.fb_users_list .fb_user{
+	display:inline-block;
+	float:left;
+	margin-right:3px;
+}
+
+.fb_users_list .fb_user img{
+	width:20px;
+	height:20px;
+}
+
+.messages{
+	display: block;
+}
+
+.messages div{
+	margin-top:5px;
+	margin-bottom:5px;
+}
+
+.messages .notice{
+	color:green;
+}
+
+.messages .error{
+	color:red;
+}
+
 /* #ri Queries
 ================================================== */
 

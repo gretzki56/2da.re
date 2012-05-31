@@ -1,6 +1,5 @@
 Dare::Application.routes.draw do
 
-
   root :to => "challenges#index"
 
   match '/auth/:provider/callback', :to => 'users#auth'
@@ -11,7 +10,12 @@ Dare::Application.routes.draw do
     get :fb_friends, :on => :collection,
       :constraints => { :format => /js|json/ }, :as => "fb_friends"
   end
-  resources :challenges
+
+  resources :challenges do
+    resources :proofs, :to => "challenges/proofs"
+    get "accept"
+    get "reject"
+  end
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -29,7 +29,7 @@
 
 	- if signed_in?
 		.four.columns
-			=link_to t(".add"), new_challenge_path, {class: "add"}
+			=link_to t(".add"), new_challenge_path, remote: !true, class: "add"
 
 .sixteen.columns
 	#challenges

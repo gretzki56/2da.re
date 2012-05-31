@@ -103,6 +103,7 @@
 
 	hr{
 		border: solid #e5d6a6;
+		border: solid white;
 		border-width: 1px 0 0;
 		clear: both;
 		/* margin: 10px 0 30px; */

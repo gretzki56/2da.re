@@ -1,0 +1,18 @@
+.proof{class: proof.photo? ? "with_photo": ""}
+	
+
+	.user
+		.image=image_tag proof.user.image(:square)
+		.name
+			=link_to proof.user, user_path(proof.user)
+		-unless proof.created_at.nil?
+			.created_at=time_ago_in_words proof.created_at
+
+	- unless proof.comment.nil?
+		.comment=proof.comment
+
+	- if proof.photo?
+		.photo=image_tag proof.photo.thumb
+
+	- if signed_in? and proof.user == current_user
+		=link_to t("remove"), challenge_proof_path(proof.challenge,proof), :method => :delete

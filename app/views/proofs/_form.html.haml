@@ -1,0 +1,19 @@
+.proof_form
+	%hr/
+
+	= form_for [@challenge,@proof] do |f|
+		-if f.object.errors.any?
+			%ul.form_errors
+				- f.object.errors.full_messages.each do |e|
+					%li=e
+
+		.user
+			.image=image_tag current_user.image(:square), width:20
+			.name=current_user
+		
+		.comment=f.text_area :comment, rows: 3
+
+		.photo
+			=f.file_field :photo
+
+		=f.submit

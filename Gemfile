@@ -16,8 +16,9 @@ gem 'omniauth-facebook'
 
 gem 'heroku'
 
-gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
-gem 'aws-sdk'
+gem 'carrierwave'
+gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
+gem 'mini_magick'
 
 gem 'rabl'
 gem 'httparty'
@@ -28,6 +29,8 @@ gem "bson_ext"
 
 gem 'pry', :group => :development
 gem 'pry-rails', :group => :development
+
+gem 'draper'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

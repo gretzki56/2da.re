@@ -5,8 +5,16 @@
 
 $(function(){
 
+	/* Masonry plugin */
 	$("div#challenges").masonry({
-		
+		itemSelector: '.challenge'
 	});
+
+	/* Hide messages on top of site */
+	if($(".messages").length != 0){
+		setTimeout(function(){
+			$(".messages").slideUp("slow");
+		},2500);
+	};
 
 });

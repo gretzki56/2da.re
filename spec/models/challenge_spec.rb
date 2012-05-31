@@ -52,4 +52,78 @@ describe Challenge do
 
 	end
 
+	context "Challenge actions" do
+
+		before do
+			@oto, @jernej, @janez = build(:oto), build(:jernej), build(:janez)
+
+			@ch_a = build(:lb_challange)
+			@ch_a.from= @oto
+			@ch_a.invited_list=[@jernej.to_fbuser]
+			@ch_a.should be_valid
+			@ch_a.public = 1
+
+		end
+
+		it "should be public" do
+			@ch_a.should be_public
+		end
+
+		it "should be invited" do
+			@ch_a.invited?(@jernej).should be_true
+		end
+
+		it "should have invite and reject" do
+			@ch_a.can_accept?(@jernej).should be_true
+			@ch_a.can_reject?(@jernej).should be_false
+		end
+
+		it "anyone can accept public" do
+			@ch_a.invited?(@janez).should be_false
+			@ch_a.can_accept?(@janez).should be_true
+			@ch_a.can_reject?(@janez).should be_false
+		end
+
+		it "can do nothing if private" do
+			@ch_a.public=0
+			@ch_a.can_accept?(@janez).should be_false
+			@ch_a.can_reject?(@janez).should be_false
+			@ch_a.public=1
+		end
+
+		it "can do nothing if owner" do
+			@ch_a.can_accept?(@oto).should be_false
+			@ch_a.can_reject?(@oto).should be_false
+		end
+
+		it "can do nothing if expired" do
+			@ch_a.can_accept?(@jernej).should be_true
+			@ch_a.deadline = 1.days.ago
+			@ch_a.can_accept?(@jernej).should be_false
+			@ch_a.expired?.should be_true
+		end
+
+		it "can #accept! and #reject!" do
+			@ch_a.invited_list.to_a.map(&:fb_uid).include?(@jernej.fb_uid).should be_true
+			@ch_a.accepted_list.to_a.map(&:fb_uid).include?(@jernej.fb_uid).should be_false
+			@ch_a.rejected_list.to_a.map(&:fb_uid).include?(@jernej.fb_uid).should be_false
+
+			@ch_a.accept!(@jernej).should be_true
+			@ch_a.accept!(@jernej).should be_false
+
+			@ch_a.can_accept?(@jernej).should be_false
+			@ch_a.can_reject?(@jernej).should be_true
+
+			@ch_a.accepted_list.to_a.map(&:fb_uid).include?(@jernej.fb_uid).should be_true
+			@ch_a.rejected_list.to_a.map(&:fb_uid).include?(@jernej.fb_uid).should be_false
+
+			@ch_a.reject!(@jernej).should be_true
+			@ch_a.reject!(@jernej).should be_false
+
+			@ch_a.rejected_list.to_a.map(&:fb_uid).include?(@jernej.fb_uid).should be_true
+			@ch_a.accepted_list.to_a.map(&:fb_uid).include?(@jernej.fb_uid).should be_false
+		end
+
+	end
+
 end

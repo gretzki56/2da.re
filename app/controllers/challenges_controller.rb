@@ -1,6 +1,27 @@
 class ChallengesController < ApplicationController
+	include ActionView::Helpers::DateHelper
 
 	respond_to :html, :json, :js
+
+	before_filter :find_challenge, :only => [
+		:edit, :show, :destroy, :update, :accept, :reject]
+
+	def find_challenge
+		begin
+			f_id = params[:id]
+			f_id = params[:challenge_id] if f_id.nil?
+			id = f_id.match(/\d+\w+/).to_s
+			@challenge = Challenge.find(id)
+
+			if @challenge.deleted?
+				flash[:error] = t("challenge_deleted")
+				return redirect_to root_url
+			end
+		rescue
+			flash[:error] = t("challenge_missing")
+			return redirect_to root_url
+		end
+	end
 
 	def index
 		types = %w(all mine)
@@ -17,25 +38,21 @@ class ChallengesController < ApplicationController
 			@challenges = Challenge.all
 		end
 		
+
+		@challenges = ChallengeDecorator.decorate(@challenges)
 		respond_with(@challenges)
 	end
 
 
 	#TODO: Improve!!!
 	def show
-		begin
-			id = params[:id].match(/\d+\w+/).to_s
-			@challenge = Challenge.find(id)
-		rescue
-			flash[:notice] = "Challenge does not exist!"
-			return redirect_to root_url
-		end
+		@proof = Proof.new(user: current_user)
+		@challenge = ChallengeDecorator.new(@challenge)
 	end
 
 	def new
-		@challenge = Challenge.new
-		@challenge.from = current_user
-		@challenge.deadline = DateTime.now+2.days
+		@challenge = Challenge.new(from: current_user,
+			deadline: DateTime.now+2.days)
 	end
 
 	def create
@@ -51,4 +68,33 @@ class ChallengesController < ApplicationController
 		render :edit
 	end
 
+	def update
+		if @challenge.update_attributes(params[:challenge])
+			flash[:notice]=t("challenge_updated")
+			@challenge.save
+		end
+
+		render :edit
+	end
+
+	def edit
+	end
+
+	def accept
+		if @challenge.accept! current_user
+			flash[:notice]=t("challenge_accepted",
+				deadline:
+					distance_of_time_in_words_to_now(@challenge.deadline))
+		end
+
+		return redirect_to challenge_path(@challenge)
+	end
+
+	def reject
+		if @challenge.reject! current_user
+			flash[:notice]=t("challenge_rejected", challenge:@challenge)
+		end
+
+		return redirect_to challenge_path(@challenge)
+	end
 end

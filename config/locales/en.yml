@@ -1,5 +1,5 @@
 en:
-  challenge_accepted: "Challenge accepted!"
+  challenge_accepted: "Challenge accepted! You have %{deadline} to complete the challenge."
   login_with_facebook: "Login with Facebook"
   logout: "Logout"
   all: "All"
@@ -7,17 +7,31 @@ en:
   big_challenges: "Big challenges"
   completed: "Completed"
   deadline: "Ends in %{deadline}."
-
+  created_at: "Created %{created_at} ago."
+  updated_at: "Updated %{updated_at} ago."
+  challenge_updated: "Challenge was sucessfuly updated."
   challenge_title: "Title"
-  challenge_deadline: "Deadline"
+  challenge_deadline: "Ends in %{deadline}."
   challenge_description: "Description"
   challenge_punishment: "Punishment"
   challenge_reward: "Reward"
-  challenge_public: "Public"
+  challenge_public: "Public challenge"
+  challenge_private: "Private challenge"
+  challenge_rejected: "You have rejected challenge: %{challenge}"
   if_public: "(Anyone can join public challenge.)"
-
+  login_to_proof: "%{login_link} to replay to challenge."
+  accept_to_proof: "%{accept_link} to add your proof."
+  you_can_accept_challenge: "You can accept."
+  proofs_and_comments: "Proofs and comments"
   invited_list: "Invited friends"
   type_friend_name: "(Type friends name.)"
+
+  accept: Accept
+  reject: Reject
+  edit: Edit
+
+  proofs: Proofs
+  proof: Proof
 
   challenges:
     index:

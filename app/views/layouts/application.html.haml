@@ -14,5 +14,13 @@
 		
 		%hr/
 
+		- if not(flash[:error].nil?) or not(flash[:notice].nil?)
+			.messages
+				- unless flash[:error].nil?
+					.error=flash[:error]
+				- unless flash[:notice].nil?
+					.notice=flash[:notice]
+
+
 		.content
 			= yield

@@ -2,7 +2,6 @@ FactoryGirl.define do
   
   factory :challenge, :aliases => [:lb_challange] do
   	association :from, factory: :oto
-  	association :to, factory: :jernej
   	title "Longboarding challange: Coleman slide"
   	description "Master the coleman slide till the end of the week."
   	reward "Free beer"

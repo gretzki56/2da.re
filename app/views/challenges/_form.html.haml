@@ -39,8 +39,8 @@
 								.labl
 									%span.name=sf.object.name
 									%a{href:"#remove", class:"remove"}="Remove"
-								= sf.hidden_field :fb_uid, class: "i_name"
-								= sf.hidden_field :name, class: "i_fb_uid"
+								= sf.hidden_field :fb_uid, class: "i_fb_uid"
+								= sf.hidden_field :name, class: "i_name"
 
 
 
@@ -61,8 +61,6 @@
 
 
 				%label{for: "challenge_deadline"}=t("challenge_deadline")
-				-# .deadline_fields
-				-#	= f.datetime_select :deadline
 				= f.text_field :deadline
 
 

@@ -65,7 +65,7 @@ describe User do
 		it "can login" do
 
 			fb_hash = from_json 'facebook_otobrglez.json'
-			puts fb_hash["uid"]
+			fb_hash["uid"].should_not be_nil
 
 		end
 	end

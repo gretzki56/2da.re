@@ -1,40 +1,26 @@
 %h2=page_title @challenge
 
-%p
-	Deadline:
-	= @challenge.deadline
+= @challenge.tools
 
-%p
-	Created at:
-	= @challenge.created_at
+.challenge_form.challenge_show
 
-	- if @challenge.updated_at != @challenge.created_at
-		%br/
-		Updated at:
-		= @challenge.updated_at
+	.four.columns
+		=t(@challenge.public? ? "challenge_public" : "challenge_private")
+		= @challenge.deadline_raw
+		= @challenge.created
+		= @challenge.perticipants 5
 
-- if signed_in?
-	.challenge_request
+	.twelve.columns
+		.from
+			= image_tag @challenge.from.image(:square)
+			= @challenge.from
 
-		-@challenge.statuses.each do |status|
-			%strong=status.to_s
+		- if @challenge.description.present?
+			.description=@challenge.description
+	
+		- challenge_proofs do
+			%h3=t("proofs_and_comments")
+			.proofs_list= render :partial => "proofs/proof", :collection => @challenge.proofs
 
-
-%strong from
-= @challenge.from
-%br/
-= image_tag @challenge.from.image
-
-%br/
-
-
-%strong Invited
-%br/
-
-- @challenge.invited_list.each do |fb_user|
-	=image_tag fb_user.image :square
-
-%br/
-%strong Accepted 
-- @challenge.accepted_list.each do |fb_user|
-	=image_tag fb_user.image :square
+		- proof? do
+			= render "proofs/form"

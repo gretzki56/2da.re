@@ -1,0 +1,18 @@
+
+var challenge_form = $("<%= j render('form') %>");
+
+challenge_form.hide();
+
+challenge_form.appendTo($("body .content")).dialog({
+	modal:true,
+	width:"50%",
+	title:"<%= t('challenges.index.add') %>",
+	draggable:false,
+	close:function(event,ui){
+
+	}
+});
+
+jQuery.getScript("/users/fb_friends.js",function(){
+	$("body #new_challenge").ChallengeFormPlugin();
+});
